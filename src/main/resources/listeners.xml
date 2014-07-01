@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="eventBus" class="com.practicalunittesting.eventbus.EventBusWrapper" >
+        <constructor-arg name="eventBus">
+            <bean class="com.google.common.eventbus.EventBus" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="register" class="com.practicalunittesting.eventbus.EventBusRegisterBeanPostProcessor" />
+
+    <bean id="sysoutEventsListener" class="com.practicalunittesting.eventbus.listener.DoneThatEventListener"/>
+    <bean id="doneThisEventsListener" class="com.practicalunittesting.eventbus.listener.DoneThisEventsListener"/>
+
+    <bean id="anotherService" class="com.practicalunittesting.eventbus.logic.AnotherService" />
+    <bean id="callAnotherServiceListener" class="com.practicalunittesting.eventbus.listener.CallAnotherServiceListener">
+        <constructor-arg name="anotherService" ref="anotherService" />
+    </bean>
+
+</beans>
